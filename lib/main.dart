@@ -13,6 +13,7 @@ void main() {
       statusBarColor: Colors.transparent, //全局设置透明
       statusBarIconBrightness: Brightness.light);
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 }
 
 class MyApp extends StatelessWidget {
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
             fallbackLocale: TranslationService.fallbackLocale,
             translations: TranslationService(),
             theme: Themes.lightTheme,
+            darkTheme: Themes.darkTheme,
           );
         });
   }

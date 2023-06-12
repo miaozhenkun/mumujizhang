@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../events/theme_event.dart';
+import '../../getxController/theme_controller.dart';
 import '../../themes/Themes.dart';
 
 class BillIndex extends StatefulWidget {
@@ -12,6 +14,8 @@ class BillIndex extends StatefulWidget {
 }
 
 class _BillIndexState extends State<BillIndex> {
+  final ThemeController themeController = Get.put(ThemeController());
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -24,34 +28,6 @@ class _BillIndexState extends State<BillIndex> {
       body:  SingleChildScrollView(
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: () {
-                print(Get.deviceLocale);
-                Get.updateLocale(const Locale('zh', 'CN'));
-                Get.changeTheme(Themes.lightTheme);
-              },
-              child: Text(
-                'covid'.tr,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                print(Get.deviceLocale);
-                Get.updateLocale(const Locale('en', 'US'));
-                Get.changeTheme(Themes.darkTheme);
-              },
-              child: Text(
-                'covid'.tr,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
           ],
         ),
       ),

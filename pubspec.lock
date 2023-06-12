@@ -171,6 +171,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.3"
+  pull_to_refresh_notification:
+    dependency: "direct main"
+    description:
+      name: pull_to_refresh_notification
+      sha256: "3f27b9695c98770db3f9f50550e5ab44a6d946d022311a55bbe6d5cd4c69a1ad"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.1"
   sky_engine:
     dependency: transitive
     description: flutter

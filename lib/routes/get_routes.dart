@@ -1,56 +1,32 @@
 import 'package:get/get.dart';
 import '../LoginPage.dart';
 import '../main.dart';
+import '../pages/mine/setting.dart';
 import '../tabs/myHomePage.dart';
 
 class GetRoutes {
   static const Tabs = '/tabs';
-  static const Login = '/login';
-  static const WebLogin = '/webLogin';
-  static const Demo = '/Demo';
-  static const Home = '/home';
-  static const AdultVaccination = '/adultVaccination';
-  static const VaccineList = '/VaccineList';
-  static const ChildHome = '/ChildHome';
-  static const GZXDropDownMenuTest = '/GZXDropDownMenuTest';
-
-  static const Jzmz = '/JzmzPage';
-  static const MzDetail = '/MzDetailPage';
-  static const NoticeList = '/NoticeListPage';
-  static const NoticeDetail = '/NoticeDetailPage';
-  static const AdultList = '/AdultListPage';
-  static const AppointmentRecordPage = '/AppointmentRecordPage';
-  static const XgVaccRecord = '/XgVaccRecordPage';
-  static const VaccDiaryCard = '/VaccDiaryCardPage';
-  static const VaccEditDiary = '/VaccEditDiaryCard';
-  static const Reservation = '/ReservationPage';
-  static const AppointNotice = '/AppointNoticePage';
-  static const SchoolChecking = '/SchoolCheckingPage';
-  static const VaccReserve = '/VaccReservePage';
-  static const Records = '/RecordsPage';
-
-  static const Setting = '/setting';
-  static const User = '/user';
-  static const Czsc = '/czscPage';
-  static const CzscDetail = '/CzscDetail';
-  static const ChangeLan = '/changeLan';
-  static const Linux = '/linux';
-  static const List = '/list';
-  static const Detail = '/detail';
 
   static const INITIAL = Tabs;
 
   static final routes = [
-    GetPage(name: Login, page: () => LoginPage()),
-    GetPage(name: Tabs, page: () => MyHomePage(), children: [
+    GetPage(name: '/login', page: () => const LoginPage()),
+    GetPage(name: Tabs, page: () => const MyHomePage(), children: [
       GetPage(
-        name: Home,
+        name: '/home',
         children: [
-          // GetPage(
-          //   name: AdultVaccination,
-          //   transition: Transition.cupertino,
-          //   page: () => AdultVaccinationPage(),
-          // ),
+          GetPage(
+            name: '/settingIndex',
+            transition: Transition.cupertino,
+            page: () => const Setting(),
+            children: [
+              GetPage(
+                  name: '/userInfo',
+                  transition: Transition.cupertino,
+                  page: () => const Setting(),
+              ),
+            ]
+          ),
           // GetPage(
           //   name: VaccineList,
           //   page: () => VaccineListPage(),

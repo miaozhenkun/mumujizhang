@@ -25,9 +25,10 @@ class _HomeIndexState extends State<HomeIndex> {
           children: [
             ElevatedButton(
               onPressed: () {
-                print(Get.deviceLocale);
-                Get.updateLocale(const Locale('zh', 'CN'));
-                Get.changeTheme(Themes.lightTheme);
+                // print(Get.deviceLocale);
+                // Get.updateLocale(const Locale('zh', 'CN'));
+                // Get.changeTheme(Themes.lightTheme);
+                Get.changeThemeMode(ThemeMode.light);
               },
               child: Text(
                 'covid'.tr,
@@ -39,9 +40,10 @@ class _HomeIndexState extends State<HomeIndex> {
             ),
             ElevatedButton(
               onPressed: () {
-                print(Get.deviceLocale);
-                Get.updateLocale(const Locale('en', 'US'));
-                Get.changeTheme(Themes.darkTheme);
+                // print(Get.deviceLocale);
+                // Get.updateLocale(const Locale('en', 'US'));
+                // Get.changeTheme(Themes.darkTheme);
+                Get.changeThemeMode(ThemeMode.dark);
               },
               child: Text(
                 'covid'.tr,

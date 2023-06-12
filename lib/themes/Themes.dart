@@ -13,14 +13,18 @@ class Themes {
       elevation: 0,
       backgroundColor: Color(0xffD1C4E9),
       iconTheme: IconThemeData(color: Colors.black),
-      titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+      titleTextStyle: TextStyle(color: Colors.black, fontSize: 20),
     ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(),
     useMaterial3: true,
+    bottomAppBarTheme: const BottomAppBarTheme(
+      color: Color(0xffD1C4E9),
+    ),
+    scaffoldBackgroundColor: Color(0xfff3f3f3),
   );
 
   ///夜间模式
   static ThemeData darkTheme = ThemeData.dark().copyWith(
+    colorScheme: ColorScheme.fromSeed(background: Colors.white, seedColor: Colors.black),
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,
       elevation: 0,
@@ -29,11 +33,9 @@ class Themes {
       titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
     ),
     useMaterial3: true,
-    scaffoldBackgroundColor: ThemeData.dark().scaffoldBackgroundColor,
-    iconTheme: const IconThemeData(
-      color: Colors.red,
+    bottomAppBarTheme: const BottomAppBarTheme(
+      color: Colors.black,
     ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(selectedItemColor: Colors.tealAccent, unselectedItemColor: Colors.blue),
-    colorScheme: ColorScheme.fromSeed(background: Colors.white, seedColor: Colors.black),
+    scaffoldBackgroundColor: ThemeData.dark().scaffoldBackgroundColor,
   );
 }

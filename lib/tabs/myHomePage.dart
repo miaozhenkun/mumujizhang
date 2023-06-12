@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../events/theme_event.dart';
+import '../getxController/theme_controller.dart';
 import '../pages/bill/billIndex.dart';
 import '../pages/calendar/calendarIndex.dart';
 import '../pages/mine/mineIndex.dart';
@@ -19,15 +23,22 @@ class _MyHomePageState extends State<MyHomePage> {
   final _controller = PageController(
     initialPage: 0,
   );
-
   List<Widget> _buildScreens() {
     return [const BillIndex(), const CalendarIndex(), const PropertyIndex(), const MineIndex()];
   }
+  final ThemeController themeController = Get.put(ThemeController());
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
   }
 
   @override
@@ -39,11 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
           physics: const NeverScrollableScrollPhysics(),
           children: _buildScreens(),
         ),
-        bottomNavigationBar: SizedBox(
-          height: 56.h,
-          child: BottomAppBar(
+        bottomNavigationBar: BottomAppBar(
+            height: 48.h,
             padding: EdgeInsets.zero,
-            color: Get.theme.appBarTheme.backgroundColor,
+            // color: Get.theme.appBarTheme.backgroundColor,
             // shape: const CircularNotchedRectangle(),
             child: Row(
               mainAxisSize: MainAxisSize.max,
@@ -57,21 +67,21 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-        )
     );
   }
 
   Widget buildBottomNavigationItem(String imgUrl, String menuName, int index) {
-    return GestureDetector(
-      child: SizedBox(
+    return GetBuilder<ThemeController>(
+      builder: (s) =>GestureDetector(
+      child:   SizedBox(
         width: 50,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(imgUrl, width: 24, height: 24, color: index == _currentIndex ? Colors.black : Colors.black38),
+            Image.asset(imgUrl, width: 24, height: 24, color: s.isDarkUiMode.value ?index == _currentIndex ? Colors.white : Colors.white38 : index == _currentIndex ? Colors.black : Colors.black38),
             Text(
               menuName.toString(),
-              style: TextStyle(fontSize: 14.sp, color: index == _currentIndex ? Colors.black : Colors.black54),
+              style: TextStyle(fontSize: 14.sp, color: s.isDarkUiMode.value?index == _currentIndex ? Colors.white : Colors.white38 : index == _currentIndex ? Colors.black : Colors.black54),
             ),
           ],
         ),
@@ -80,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
       onTap: () {
         goPage(index);
       },
-    );
+    ));
   }
 
   Widget buildBottomNavigationAccountItem() {
