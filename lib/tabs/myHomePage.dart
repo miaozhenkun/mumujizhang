@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return GetBuilder<ThemeController>(
       builder: (s) =>GestureDetector(
       child:   SizedBox(
-        width: 50,
+        width: 70.w,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
