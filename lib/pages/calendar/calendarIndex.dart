@@ -187,7 +187,7 @@ class _CalendarIndexState extends State<CalendarIndex> with AutomaticKeepAliveCl
                 ),
                 Container(
                   key: globalKey,
-                  height: 50,
+                  height: 50.h,
                   margin: const EdgeInsets.only(top: 1),
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -236,7 +236,6 @@ class _CalendarIndexState extends State<CalendarIndex> with AutomaticKeepAliveCl
   void showDialogPage(BuildContext context, double dy) {
     showDialog(
         context: context,
-        anchorPoint: Offset(100, 100),
         barrierColor: Colors.transparent,
         builder: (e) {
           return Stack(
@@ -245,7 +244,7 @@ class _CalendarIndexState extends State<CalendarIndex> with AutomaticKeepAliveCl
               Positioned(
                 // 指定位置
                 left: 12,
-                top: dy - 50,
+                top: dy -30.h,
                 child: Material(
                   child: Container(
                     width: 150.w,
