@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -58,129 +59,29 @@ class _SettingState extends State<Setting> {
                         themeController.setIsDarkUiMode(!s.isDarkUiMode.value);
                       })),
             ),
-            Container(
-              margin: EdgeInsets.all(10.w),
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: TableCalendar(
-                firstDay: kFirstDay,
-                lastDay: kLastDay,
-                focusedDay: _focusedDay,
-                calendarFormat: _calendarFormat,
-                headerVisible: false,
-                daysOfWeekVisible: true,
-                daysOfWeekHeight: 40,
-                rowHeight: 58,
-                startingDayOfWeek: StartingDayOfWeek.monday,
-                pageJumpingEnabled: true,
-                daysOfWeekStyle: DaysOfWeekStyle(
-                    dowTextFormatter: (DateTime date, locale) {
-                      switch (date.weekday) {
-                        case 1:
-                          return '一';
-                        case 2:
-                          return '二';
-                        case 3:
-                          return '三';
-                        case 4:
-                          return '四';
-                        case 5:
-                          return '五';
-                        case 6:
-                          return '六';
-                        case 7:
-                          return '日';
-                      }
-                      return '一';
-                    },
-                    weekdayStyle: const TextStyle(fontWeight: FontWeight.w600),
-                    weekendStyle: const TextStyle(fontWeight: FontWeight.w600),
-                    decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Color(0xfff3f3f3))))),
-                calendarBuilders: CalendarBuilders(defaultBuilder: (context, day, day1) {
-                  Lunar date = Lunar.fromDate(day);
-                  Solar solar = Solar.fromDate(day);
-                  String text = date.getDayInChinese();
-
-                  solar.getFestivals().isNotEmpty ? text =  solar.getFestivals()[0]: text= text;
-                  date.getJieQi().isNotEmpty ? text =  date.getJieQi(): text= text;
-                  date.getFestivals().isNotEmpty ? text =  date.getFestivals()[0]: text= text;
-
-                  return Column(
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                        width: 28,
-                        height: 28,
-                        alignment: Alignment.center,
-                        child: Text(
-                          day.day.toString(),
-                          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Text(
-                        text,
-                        style: TextStyle(fontSize: 10.sp),
-                      ),
-                    ],
-                  );
-                }, selectedBuilder: (context, day, day1) {
-                  Lunar date = Lunar.fromDate(day);
-
-                  return Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(color: Get.theme.appBarTheme.backgroundColor, shape: BoxShape.circle),
-                        width: 28,
-                        height: 28,
-                        alignment: Alignment.center,
-                        child: Text(
-                          DateTime.now().day == day.day ? "今" : day.day.toString(),
-                          style: TextStyle(fontSize: 14.sp, color: Colors.white, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Text(
-                        date.getFestivals().isEmpty ? date.getDayInChinese() : date.getFestivals()[0],
-                        style: TextStyle(fontSize: 10.sp),
-                      ),
-                    ],
-                  );
-                }, todayBuilder: (context, day, day1) {
-                  Lunar date = Lunar.fromDate(day);
-                  return Column(
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                        width: 28,
-                        height: 28,
-                        alignment: Alignment.center,
-                        child: Text(
-                          '今',
-                          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Text(
-                        date.getFestivals().isEmpty ? date.getDayInChinese() : date.getFestivals()[0],
-                        style: TextStyle(fontSize: 10.sp),
-                      ),
-                    ],
-                  );
-                }),
-                selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay, day);
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay; // update `_focusedDay` here as well
-                  });
-                },
-                onPageChanged: (focusedDay) {
-                  _focusedDay = focusedDay;
-                },
-                onFormatChanged: (format) {
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                },
+            ListTile(
+              onTap: () async {
+                Dio dio = Dio();
+               var res = await  dio.post("http://123.207.201.182:7001/admin/mobileLogin",data: {
+                  "username": "miao",
+                  "password": "123456"
+                });
+                var res1 = await  dio.get("http://123.207.201.182:7001/news",data: {
+                  "username": "miao",
+                  "password": "123456"
+                });
+               print(res.statusCode);
+               print(res.statusMessage);
+               print(res.data);
+               print(res.data["code"]);
+               print(res.data["message"]);
+               print(res.data["data"]);
+               print(res1.data["data"][0]["title"]);
+               print(res1.data["data"].length);
+              },
+              title: Text(
+                '登录',
+                style: TextStyle(fontSize: 16.sp),
               ),
             ),
           ],
